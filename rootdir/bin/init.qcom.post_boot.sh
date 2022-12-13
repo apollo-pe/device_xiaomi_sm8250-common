@@ -5260,7 +5260,7 @@ case "$target" in
         echo 0-2     > /dev/cpuset/background/cpus
         echo 0-3     > /dev/cpuset/system-background/cpus
         echo 4-7     > /dev/cpuset/foreground/boost/cpus
-        echo 0-2,4-7 > /dev/cpuset/foreground/cpus
+        echo 0-3,4-6 > /dev/cpuset/foreground/cpus
         echo 0-7     > /dev/cpuset/top-app/cpus
 
 	# Turn off scheduler boost at the end
@@ -5280,7 +5280,7 @@ case "$target" in
 
 	# configure input boost settings
 	echo "0:1344000" > /sys/devices/system/cpu/cpu_boost/input_boost_freq
-	echo 120 > /sys/devices/system/cpu/cpu_boost/input_boost_ms
+	echo 500 > /sys/devices/system/cpu/cpu_boost/input_boost_ms
 
 	# configure governor settings for gold cluster
 	echo "schedutil" > /sys/devices/system/cpu/cpufreq/policy4/scaling_governor
