@@ -38,13 +38,19 @@ public final class RefreshUtils {
 
     protected static final int STATE_DEFAULT = 0;
     protected static final int STATE_STANDARD = 1;
-    protected static final int STATE_EXTREME = 2;
+    protected static final int STATE_LOW = 2;
+    protected static final int STATE_HIGH = 3;
+    protected static final int STATE_EXTREME = 4;
 
     private static final float REFRESH_STATE_DEFAULT = 60f;
+    private static final float REFRESH_STATE_LOW = 30f;
     private static final float REFRESH_STATE_STANDARD = 60f;
+    private static final float REFRESH_STATE_HIGH = 90f;
     private static final float REFRESH_STATE_EXTREME = 120f;
 
+    private static final String REFRESH_LOW = "refresh.low=";
     private static final String REFRESH_STANDARD = "refresh.standard=";
+    private static final String REFRESH_HIGH = "refresh.high=";
     private static final String REFRESH_EXTREME = "refresh.extreme=";
 
     private SharedPreferences mSharedPrefs;
@@ -64,8 +70,8 @@ public final class RefreshUtils {
     }
 
    protected void getOldRate(){
-        defaultMaxRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_PEAK_REFRESH_RATE, 60);
-        defaultMinRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_MIN_REFRESH_RATE, 60);
+        defaultMaxRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_PEAK_REFRESH_RATE, 120);
+        defaultMinRate = Settings.System.getFloat(mContext.getContentResolver(), KEY_MIN_REFRESH_RATE, 30);
     }
 
 
@@ -88,9 +94,15 @@ public final class RefreshUtils {
         switch (mode) {
             case STATE_STANDARD:
                 modes[0] = modes[0] + packageName + ",";
+                break;   
+            case STATE_LOW:
+                modes[1] = modes[1] + packageName + ",";
+                break;
+            case STATE_HIGH:
+                modes[2] = modes[2] + packageName + ",";
                 break;
             case STATE_EXTREME:
-                modes[1] = modes[1] + packageName + ",";
+                modes[3] = modes[3] + packageName + ",";
                 break;
         }
 
